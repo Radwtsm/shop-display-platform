@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu</title>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/menu.css">
+<script type="module" src="/assets/menu.js"></script>
+</head>
+<body class="mn-pagina">
+<header class="mn-barra"><img id="logo" class="mn-logo" alt="" hidden><h1 id="nome">Menu</h1></header>
+<main>
+  <section class="mn-filtri" aria-labelledby="mn-f-tit">
+    <h2 id="mn-f-tit">Senza…</h2>
+    <p class="mn-aiuto">Tocca gli allergeni da evitare: restano solo i piatti che non li contengono.</p>
+    <div id="filtri" class="mn-gruppo-filtri" role="group" aria-label="Allergeni da evitare"></div>
+    <button type="button" id="togli" class="mn-togli" hidden>Togli i filtri</button>
+    <p id="esito" class="mn-esito" role="status"></p>
+  </section>
+  <p class="mn-legale">Allergie o intolleranze? Chiedi al personale prima di ordinare: i piatti possono cambiare e in cucina gli ingredienti si possono incrociare.</p>
+  <div id="menu"></div>
+  <details class="mn-allergeni-tutti">
+    <summary>I 14 allergeni da indicare</summary>
+    <ul id="elenco" class="mn-elenco"></ul>
+  </details>
+</main>
+</body>
+</html>

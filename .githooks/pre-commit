@@ -1,0 +1,9 @@
+#!/bin/sh
+# Nothing is committed with a secret, a type error or a red test.
+dir=$(dirname "$0")
+sh "$dir/pre-commit.gitleaks" || exit 1
+if ! npm run -s check; then
+    echo "pre-commit: npm run check failed -- commit blocked." >&2
+    exit 1
+fi
+exit 0

@@ -1,0 +1,5 @@
+/* Regole di adatta() (src/piattaforma/tv/adatta.ts), caricate da player.html. File a parte perché il test di
+   adatta (test/e2e/adatta.spec.ts) le prova da sole, senza il resto della TV. */
+[data-righe] { overflow-wrap: break-word; }
+[data-righe="1"] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tagliato:not([data-righe="1"]) { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }

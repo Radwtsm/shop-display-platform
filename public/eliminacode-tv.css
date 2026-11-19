@@ -1,0 +1,67 @@
+/* Zona dell'Eliminacode sulla TV (caricata da src/servizi/eliminacode/tv.ts). Colori e font del negozio dal guscio, misure in vh (in cqi nel riquadro della colonna destra): si legge a 5 m. */
+.eq-tv[hidden] { display: none; }
+.eq-tv { display: grid; justify-items: center; align-content: center; gap: 2vh; text-align: center; width: 100%; min-width: 0; }
+.eq-etichetta { font-size: var(--tv-testo-eq-etichetta); font-weight: 800; line-height: 1.1; }
+.eq-numero { position: relative; overflow: hidden; min-height: min-content; font-size: var(--tv-testo-eq-numero); font-weight: 900; line-height: .95; color: var(--accento); font-variant-numeric: tabular-nums; }
+.eq-cifre, .eq-via { display: block; }
+.eq-via { position: absolute; inset: 0; overflow: hidden; } /* il vecchio numero non conta nella misura di adattaLarghezza */
+/* «Ora serviamo» fuori dal primo piano, «Tocca al numero» quando prende lo schermo */
+.eq-tocca, .zona[data-forma="primo-piano"] .eq-ora { display: none; }
+.zona[data-forma="primo-piano"] .eq-tocca { display: inline; }
+/* coda viva: spazio riservato anche vuoto (niente salti quando arrivano) */
+/* --eq-det = misura del testo per disposizione; l'altezza segue quella, non il font che adatta() riduce */
+.eq-tv { --eq-det: var(--tv-testo-eq-dettaglio); }
+.eq-prima, .eq-ritmo { margin: 0; height: calc(var(--eq-det) * 1.5); line-height: calc(var(--eq-det) * 1.5); font-size: var(--eq-det); color: var(--testo-2); font-variant-numeric: tabular-nums; max-width: 100%; }
+.eq-ritmo { height: calc(var(--eq-det) * 3); }
+.eq-serviti, .eq-passo { display: block; }
+.eq-prima { display: flex; flex-wrap: nowrap; gap: .4em; justify-content: center; align-items: center; }
+.eq-chip { line-height: 1; padding: .1em .4em; border-radius: 99px; border: .12em solid var(--linea); }
+/* la barra sta nella riga del ritmo: cambiare forma non sposta niente (anche con l'Eliminacode da solo) */
+.eq-tv > *, .eq-lato > * { grid-column: 1; }
+/* «Prima» e ritmo: nella zona contano come righe sue; da sola sulla TV il guscio li sposta nel tile della colonna destra */
+.eq-lato { display: contents; }
+/* A142 foto TV: «Prima» e ritmo piccoli in mezzo al vuoto → riempiono il tile: «Prima» in cima, ultimi chiamati uno
+   sotto l'altro a livello 2, in fondo serviti e ritmo a livello 3 sotto una linea (come nel riquadro) */
+#lato > .eq-lato { grid-row: 1; display: grid; grid-template-rows: 1fr auto; align-content: space-between; gap: 2vh; min-width: 0; min-height: 0; overflow: hidden; padding: 2.6vh 2.4vh; border-radius: var(--tv-misura-raggio); background: var(--tile); }
+/* A143: pillole larghe quanto il tile, spazio diviso in parti uguali fino ai serviti (niente buco sotto l'ultima) */
+#lato > .eq-lato .eq-prima { --eq-det: var(--tv-livello-2); height: auto; line-height: 1.1; flex-direction: column; align-items: stretch; justify-content: space-between; gap: 1.6vh; }
+#lato > .eq-lato .eq-chip { text-align: center; }
+#lato > .eq-lato .eq-prima > :first-child:not(.eq-chip) { font-size: var(--tv-livello-3); }
+#lato > .eq-lato .eq-ritmo { --eq-det: var(--tv-livello-3); line-height: 1.4; height: auto; padding-top: 2vh; border-top: .15vh solid var(--linea); }
+#lato > .eq-lato .eq-serviti { font-weight: var(--peso-forte); color: var(--testo); }
+/* sul colore pieno della coda da sola: nero o bianco come nel riquadro */
+body[data-solo="1"] main :is(.eq-etichetta, .eq-numero, .eq-banco) { color: inherit; }
+.eq-ritmo, .eq-barra { grid-row: 5; }
+.eq-barra { align-self: center; }
+.zona[data-forma="primo-piano"] :is(.eq-prima, .eq-ritmo) { visibility: hidden; }
+.eq-barra { display: none; margin: 0; width: 40vh; max-width: 80%; height: .8vh; border-radius: 99px; background: var(--linea); overflow: hidden; }
+.eq-barra i { display: block; height: 100%; background: var(--accento); transform-origin: left; transform: scaleX(0); }
+.zona[data-forma="primo-piano"] .eq-barra { display: block; }
+.eq-banco { font-size: var(--tv-testo-eq-banco); font-weight: 800; line-height: 1.1; height: 1.1em; }
+main[data-disposizione="affiancato"] .eq-numero { font-size: var(--tv-testo-eq-numero-affiancato); }
+main[data-disposizione="affiancato"] .eq-etichetta { font-size: var(--tv-testo-eq-etichetta-affiancato); }
+main[data-disposizione="affiancato"] .eq-banco { font-size: var(--tv-testo-eq-banco-affiancato); }
+main[data-disposizione="affiancato"] .eq-tv { --eq-det: var(--tv-testo-eq-dettaglio-affiancato); }
+.zona[data-forma="riquadro"] .eq-tv { gap: 0.4vh; }
+.zona[data-forma="riquadro"] .eq-etichetta { font-size: var(--tv-testo-eq-etichetta-riquadro); }
+.zona[data-forma="riquadro"] .eq-numero { font-size: var(--tv-testo-eq-numero-riquadro); color: var(--testo); }
+.zona[data-forma="riquadro"] .eq-banco { font-size: var(--tv-testo-eq-banco-riquadro); }
+.zona[data-forma="riquadro"] .eq-tv { --eq-det: var(--tv-testo-eq-dettaglio-riquadro); }
+.zona[data-forma="riquadro"] .eq-prima { margin-top: 1vh; }
+/* Riquadro come il mockup A136: tutto a sinistra, occhiello piccolo, numero grande col font dei titoli, banco
+   nell'accento, ultimi chiamati, e in fondo serviti e ritmo sotto una linea. Le righe non dipendono dai dati. */
+.zona[data-forma="riquadro"] .eq-tv { justify-items: start; text-align: left; align-content: start; gap: 1vh; }
+/* «Ora serviamo» una sola forma, riquadro e coda da sola: niente maiuscolo spaziato (A142, come le categorie del menu A141) */
+.zona[data-forma="riquadro"] .eq-etichetta { font-weight: var(--peso-forte); color: var(--accento); }
+.zona[data-forma="riquadro"] .eq-numero { font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.zona[data-forma="riquadro"] .eq-banco { font-weight: var(--peso-forte); color: var(--accento); }
+.zona[data-forma="riquadro"] .eq-prima { justify-content: flex-start; }
+.zona[data-forma="riquadro"] .eq-ritmo { margin-top: 1.4vh; width: 100%; height: auto; min-height: calc(var(--eq-det) * 3); line-height: 1.5; padding-top: 1.4vh; border-top: .15vh solid var(--linea); }
+.zona[data-forma="riquadro"] .eq-serviti { font-weight: var(--peso-forte); }
+/* Sul colore pieno (player.css) tutte le scritte e le linee sono nero o bianco (--su-accento): contrasto ≥ 4,5
+   con qualsiasi colore del negozio; niente opacità né testo-2, che lo abbasserebbero. */
+.zona[data-forma="riquadro"] :is(.eq-etichetta, .eq-numero, .eq-banco, .eq-prima, .eq-ritmo) { color: inherit; }
+.zona[data-forma="riquadro"] :is(.eq-chip, .eq-ritmo) { border-color: currentColor; }
+.zona[data-forma="primo-piano"] .eq-numero { font-size: var(--tv-testo-eq-numero); }
+.zona[data-forma="primo-piano"] .eq-etichetta { font-size: var(--tv-testo-eq-etichetta); }
+.zona[data-forma="primo-piano"] .eq-banco { font-size: var(--tv-testo-eq-banco); }

@@ -1,0 +1,191 @@
+{
+  "riferimento": "2026-10-27T09:00:00Z",
+  "versioneAttuale": "0.3.0",
+  "clienti": [
+    {
+      "id": "panificio-demo",
+      "nome": "Panificio Demo",
+      "settore": "Panificio",
+      "zona": "Centro",
+      "servizi": [
+        {
+          "servizio": "schermo",
+          "canone": 2900
+        }
+      ],
+      "cliente_dal": "2026-09-01",
+      "dispositivi": [
+        {
+          "id": "pd-banco",
+          "nome": "TV banco",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:59:30Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-09-20T10:00:00Z"
+      }
+    },
+    {
+      "id": "bar-esempio",
+      "nome": "Bar Esempio",
+      "settore": "Bar",
+      "zona": "Stazione",
+      "servizi": [
+        {
+          "servizio": "schermo",
+          "canone": 2900
+        },
+        {
+          "servizio": "menu-qr",
+          "canone": 2000
+        }
+      ],
+      "cliente_dal": "2026-08-15",
+      "dispositivi": [
+        {
+          "id": "be-cassa",
+          "nome": "TV cassa",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T06:52:00Z",
+          "versione": "0.3.0"
+        },
+        {
+          "id": "be-sala",
+          "nome": "TV sala",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:59:50Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-10-20T10:00:00Z"
+      }
+    },
+    {
+      "id": "macelleria-prova",
+      "nome": "Macelleria Prova",
+      "settore": "Macelleria",
+      "zona": "Mercato",
+      "servizi": [
+        {
+          "servizio": "schermo",
+          "canone": 2900
+        },
+        {
+          "servizio": "eliminacode",
+          "canone": 3000
+        }
+      ],
+      "cliente_dal": "2026-07-10",
+      "dispositivi": [
+        {
+          "id": "mp-banco",
+          "nome": "TV banco",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:59:40Z",
+          "versione": "0.2.1"
+        },
+        {
+          "id": "mp-numeri",
+          "nome": "Numerino",
+          "servizio": "eliminacode",
+          "ultimoSegnale": "2026-10-27T08:59:45Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-10-18T10:00:00Z"
+      }
+    },
+    {
+      "id": "farmacia-modello",
+      "nome": "Farmacia Modello",
+      "settore": "Farmacia",
+      "zona": "Viale",
+      "servizi": [
+        {
+          "servizio": "eliminacode",
+          "canone": 3900
+        }
+      ],
+      "cliente_dal": "2026-10-01",
+      "dispositivi": [
+        {
+          "id": "fm-attesa",
+          "nome": "Sala d'attesa",
+          "servizio": "eliminacode",
+          "ultimoSegnale": "2026-10-27T08:59:55Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-10-15T10:00:00Z"
+      }
+    },
+    {
+      "id": "parrucchiere-test",
+      "nome": "Parrucchiere Test",
+      "settore": "Parrucchiere",
+      "zona": "Centro",
+      "servizi": [
+        {
+          "servizio": "schermo",
+          "canone": 2900
+        }
+      ],
+      "cliente_dal": "2026-10-20",
+      "dispositivi": [
+        {
+          "id": "pt-vetrina",
+          "nome": "Vetrina",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:58:10Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-10-21T10:00:00Z"
+      }
+    },
+    {
+      "id": "palestra-campione",
+      "nome": "Palestra Campione",
+      "settore": "Palestra",
+      "zona": "Periferia",
+      "servizi": [
+        {
+          "servizio": "schermo",
+          "canone": 2900
+        }
+      ],
+      "cliente_dal": "2026-06-01",
+      "dispositivi": [
+        {
+          "id": "pc-ingresso",
+          "nome": "Ingresso",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:59:20Z",
+          "versione": "0.3.0"
+        },
+        {
+          "id": "pc-sala",
+          "nome": "Sala pesi",
+          "servizio": "schermo",
+          "ultimoSegnale": "2026-10-27T08:59:25Z",
+          "versione": "0.3.0"
+        }
+      ],
+      "backup": {
+        "ultimo": "2026-10-27T03:00:00Z",
+        "provaRipristino": "2026-10-10T10:00:00Z"
+      }
+    }
+  ]
+}

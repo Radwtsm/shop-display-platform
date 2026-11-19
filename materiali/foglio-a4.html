@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Le offerte del giorno sulla vostra TV</title>
+<style>
+  /* Stampa a casa: A4, margini sicuri, niente abbondanza. Font di sistema per documenti (non SF: licenza solo per le interfacce Apple). */
+  @page { size: A4; margin: 12mm; }
+  :root { --inchiostro: #1c1c1e; --secondario: #4a4a4f; --accento: #0062cc; --fondo: #f2f2f7; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color: var(--inchiostro); font-size: 12.5pt; line-height: 1.35; }
+  h1 { font-size: 27pt; line-height: 1.08; letter-spacing: -0.01em; }
+  .sotto { font-size: 15pt; color: var(--secondario); margin-top: 3mm; }
+  .immagini { display: grid; grid-template-columns: 1fr 30%; gap: 6mm; align-items: end; margin: 6mm 0 6mm; }
+  .immagini img { width: 100%; display: block; border-radius: 3mm; }
+  .tv img { border: 2.5mm solid var(--inchiostro); border-radius: 2mm; }
+  .tel img { border: 2mm solid var(--inchiostro); border-radius: 5mm; }
+  figcaption { font-size: 10pt; color: var(--secondario); margin-top: 1.5mm; }
+  .punti { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 8mm; list-style: none; padding: 0; }
+  .punti li { background: var(--fondo); border-radius: 3mm; padding: 3.5mm 4.5mm; }
+  .punti b { display: block; font-size: 13.5pt; margin-bottom: 1mm; }
+  .proposta { margin-top: 6mm; padding: 6mm; border: 0.6mm solid var(--accento); border-radius: 3mm; display: flex; justify-content: space-between; align-items: center; gap: 6mm; }
+  .proposta p { font-size: 15pt; font-weight: 700; }
+  .contatti { text-align: right; }
+  .contatti .nome { font-size: 14pt; font-weight: 700; }
+  .contatti .tel { font-size: 13pt; color: var(--accento); }
+</style>
+</head>
+<body>
+  <h1>Le offerte del giorno<br>sulla vostra TV</h1>
+  <p class="sotto">Le cambiate dal telefono in 10 secondi. Nessuna app da installare.</p>
+  <div class="immagini">
+    <figure class="tv"><img src="tv.png" alt="La TV del negozio con un'offerta e il prezzo"><figcaption>Sulla TV del negozio</figcaption></figure>
+    <figure class="tel"><img src="telefono.png" alt="Il pannello sul telefono"><figcaption>Dal vostro telefono</figcaption></figure>
+  </div>
+  <ul class="punti">
+    <li><b>Orari automatici</b>La colazione la mattina, il pranzo a mezzogiorno: la TV cambia da sola.</li>
+    <li><b>Prezzi chiari</b>Prezzo grande e leggibile da lontano, anche al kg o al litro.</li>
+    <li><b>Funziona anche senza internet</b>Se la rete cade, la TV continua a mostrare le offerte.</li>
+    <li><b>Il vostro negozio</b>Nome, logo e colori vostri; a Natale un tema apposta.</li>
+    <li><b>Un QR per le recensioni</b>I clienti inquadrano e vi lasciano una recensione.</li>
+    <li><b>Si sbaglia senza paura</b>Ogni modifica si annulla con un tocco.</li>
+  </ul>
+  <div class="proposta">
+    <p data-campo="proposta"></p>
+    <div class="contatti"><p class="nome" data-campo="nome"></p><p class="tel" data-campo="contatto"></p></div>
+  </div>
+</body>
+</html>

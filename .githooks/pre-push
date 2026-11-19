@@ -1,0 +1,7 @@
+#!/bin/sh
+# Known vulnerabilities in dependencies + OWASP code rules before anything leaves the Mac.
+if ! npm run -s sicurezza; then
+    echo "pre-push: npm run sicurezza failed (osv-scanner / semgrep) -- push blocked." >&2
+    exit 1
+fi
+exit 0

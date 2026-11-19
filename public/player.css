@@ -1,0 +1,263 @@
+/* Palette: i 4 colori del negozio (controllati per contrasto) restano; fondo a due toni, superfici e linee si
+   calcolano da sfondo, primario e testo, così ogni cliente ha un aspetto ricco con un colore solo (A136(7)).
+   Sul body, non su :root: temi e Lavagna cambiano --sfondo e --primario sul body. */
+:root {
+  --primario: var(--tv-primario); --accento: var(--tv-accento); --sfondo: var(--tv-sfondo); --testo: var(--tv-testo);
+  --su-accento: var(--tv-su-accento);
+}
+body {
+  --fondo-2: color-mix(in srgb, var(--primario) 38%, var(--sfondo));
+  --superficie: color-mix(in srgb, var(--primario) 30%, var(--sfondo));
+  --linea: color-mix(in srgb, var(--testo) 22%, transparent);
+  --testo-2: color-mix(in srgb, var(--testo) 78%, var(--sfondo));
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+/* TV a tile (A141, owner 12/11 «layout totale come insiemi di tiles, separate e consistenti»): ogni blocco è un tile
+   con lo stesso raggio, separato dagli altri dallo stesso spazio, dentro lo stesso margine; ogni bordo si allinea a un
+   altro (il piede finisce col contenuto, la colonna destra parte col contenuto e chiude in basso col piede). Le misure
+   non dipendono da cosa arriva: niente salti, a ogni misura. Colonna destra: la coda (riquadro) e il QR; senza coda
+   il contenuto e il piede prendono tutta la larghezza. */
+body {
+  color: var(--testo); overflow: hidden; cursor: none; font-family: var(--font-tv-testo);
+  background:
+    radial-gradient(120vh 90vh at 85% -10%, var(--fondo-2), transparent 60%),
+    radial-gradient(90vh 70vh at -5% 110%, color-mix(in srgb, var(--primario) 22%, transparent), transparent 60%),
+    var(--sfondo);
+  --tile: color-mix(in srgb, var(--testo) 7%, transparent);
+  display: grid; padding: var(--tv-misura-margine); gap: var(--tv-misura-spazio);
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: var(--tv-misura-testa) minmax(0, 1fr) var(--tv-misura-piede);
+  grid-template-areas: "testa barra" "main lato" "piede lato";
+}
+body:is([data-riquadro="1"], [data-qr="1"][data-qr-dove="tile"]) { grid-template-columns: minmax(0, 1fr) var(--tv-misura-lato); }
+/* posizione della barra (ora, meteo) × posizione di nome e logo: la colonna destra resta sempre quella */
+body[data-barra="sotto"] { grid-template-areas: "testa testa" "main lato" "piede barra"; }
+body[data-barra="nascosta"] { grid-template-areas: "testa testa" "main lato" "piede lato"; }
+body[data-testata="basso"] { grid-template-rows: var(--tv-misura-testa) minmax(0, 1fr) var(--tv-misura-piede) var(--tv-misura-testa); grid-template-areas: "barra barra" "main lato" "piede lato" "testa testa"; }
+body[data-testata="basso"][data-barra="sotto"] { grid-template-rows: minmax(0, 1fr) var(--tv-misura-piede) var(--tv-misura-testa); grid-template-areas: "main lato" "piede lato" "testa barra"; }
+body[data-testata="basso"][data-barra="nascosta"] { grid-template-rows: minmax(0, 1fr) var(--tv-misura-piede) var(--tv-misura-testa); grid-template-areas: "main lato" "piede lato" "testa testa"; }
+body[data-testata="nascosta"] { grid-template-areas: "barra barra" "main lato" "piede lato"; }
+body[data-testata="nascosta"][data-barra="sotto"] { grid-template-rows: minmax(0, 1fr) var(--tv-misura-piede); grid-template-areas: "main lato" "piede barra"; }
+body[data-testata="nascosta"][data-barra="nascosta"] { grid-template-rows: minmax(0, 1fr) var(--tv-misura-piede); grid-template-areas: "main lato" "piede lato"; }
+/* senza coda la colonna destra non c'è: il contenuto arriva al margine; il piede anche, se accanto non ha il QR o la barra */
+body:not([data-riquadro="1"]) #lato { display: none; }
+body:not([data-riquadro="1"]) main,
+body:not([data-riquadro="1"]):not([data-qr="1"][data-qr-dove="tile"]):not([data-barra="sotto"]) #piede,
+body:not([data-riquadro="1"]):not([data-qr="1"][data-qr-dove="tile"])[data-testata="basso"] #piede { grid-column: 1 / -1; }
+/* solo coda (A141): niente gira, niente piede; il contenuto (la coda, piena nel colore del negozio) scende fino in fondo */
+body[data-solo="1"] #piede { display: none; }
+body[data-solo="1"] main { grid-row: main-start / piede-end; background: var(--accento); color: var(--su-accento); }
+/* i tile: stesso fondo e raggio; coda (pieno nel colore del negozio) e QR (bianco) hanno il loro */
+header, #barra, main, #piede { background: var(--tile); border-radius: var(--tv-misura-raggio); }
+/* «nascosta» toglie anche gli orari, che stanno nella testata */
+body[data-barra="nascosta"] #b-orari { display: none; }
+
+header { grid-area: testa; display: flex; align-items: center; gap: var(--tv-misura-spazio); padding: 0 var(--tv-misura-spazio); min-width: 0; position: relative; z-index: 1; }
+#logo { height: 6vh; width: auto; border-radius: var(--tv-misura-raggio-piccolo); }
+/* senza logo: quadrato del marchio con l'iniziale (mockup A136) */
+.iniziale { flex: none; width: var(--tv-misura-iniziale); height: var(--tv-misura-iniziale); border-radius: var(--tv-misura-raggio-piccolo); background: var(--primario); color: var(--testo);
+  display: grid; place-items: center; font-family: var(--font-titolo, var(--font-tv-titolo)); font-weight: 800; font-size: var(--tv-testo-iniziale); line-height: 1; }
+.iniziale[hidden] { display: none; }
+#nome { font-size: var(--tv-testo-nome); font-weight: var(--peso-titolo); line-height: 1.15; letter-spacing: -.01em; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+main { grid-area: main; display: grid; grid-auto-rows: minmax(0, 1fr); place-items: center; padding: var(--tv-misura-spazio); text-align: center; min-width: 0; min-height: 0; position: relative; z-index: 1; }
+/* Zona di un servizio: da sola (o a rotazione) occupa il contenuto; affiancate dividono la larghezza. */
+.zona { display: contents; }
+.zona[hidden] { display: none; }
+main[data-disposizione="affiancato"] { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4vh; place-items: stretch; }
+main[data-disposizione="affiancato"] > .zona:not([hidden]) { display: grid; grid-template-rows: minmax(0, 1fr); place-items: center; min-width: 0; container-type: inline-size; }
+/* a mezza larghezza il titolo segue la colonna, non lo schermo: niente parole spezzate a 960×540 */
+main[data-disposizione="affiancato"] { --tv-titolo-qui: min(var(--tv-testo-titolo), 11cqi); --tv-prezzo-qui: min(var(--tv-testo-prezzo), 13cqi); }
+body[data-foto="1"] main[data-disposizione="affiancato"] #slide { grid-template-columns: 1fr; gap: 2vh; }
+body[data-foto="1"] main[data-disposizione="affiancato"] .cornice { height: 38vh; }
+#titolo { font-size: calc(var(--tv-titolo-qui, var(--tv-testo-titolo)) * var(--riempi, 1)); line-height: 1; letter-spacing: -.025em; font-weight: 800; overflow-wrap: break-word; text-wrap: balance; }
+#prezzo { font-size: calc(var(--tv-prezzo-qui, var(--tv-testo-prezzo)) * var(--riempi, 1)); line-height: 1; letter-spacing: -.02em; font-weight: 800; color: var(--accento); margin-top: 3vh; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#prezzo:empty, #per-unita:empty { display: none; }
+#per-unita { font-size: calc(var(--tv-testo-nota) * var(--riempi, 1)); color: var(--accento); margin-top: 1vh; font-variant-numeric: tabular-nums; }
+#nota { font-size: calc(var(--tv-testo-nota) * var(--riempi, 1)); margin-top: 2vh; color: var(--testo-2); }
+/* Offerta con foto: foto a sinistra, testo a destra; senza foto tutto al centro come prima. */
+#slide { width: 100%; }
+#foto[hidden], .cornice:has(> #foto[hidden]) { display: none; }
+body[data-foto="1"] #slide { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 5vh; align-items: center; text-align: left; }
+/* la cornice ritaglia la foto che si muove: senza, ingrandita esce sopra testata, piede e testi */
+body[data-foto="1"] .cornice { position: relative; width: 100%; height: var(--tv-misura-cornice); border-radius: var(--tv-misura-raggio); overflow: hidden; }
+body[data-foto="1"] #foto { display: block; width: 100%; height: 100%; object-fit: cover; }
+body[data-foto="1"] #titolo { font-size: calc(var(--tv-testo-titolo-con-foto) * var(--riempi, 1)); }
+body[data-foto="1"] #prezzo { font-size: calc(var(--tv-prezzo-qui, var(--tv-testo-prezzo-con-foto)) * var(--riempi, 1)); margin-top: 2.4vh; }
+body[data-foto="1"] #per-unita { font-size: calc(var(--tv-testo-offerta-unita) * var(--riempi, 1)); color: var(--testo-2); }
+body[data-foto="1"] #nota { font-size: calc(var(--tv-testo-nota-con-foto) * var(--riempi, 1)); line-height: 1.3; }
+/* foto che si muove piano (Ken Burns, mockup A136(4)): solo trasformazioni, niente sfocature sopra */
+/* owner 12/11 «le foto non si muovono»: prima 10 s e poi ferma (+8%, quasi invisibile); ora sempre in moto, avanti e indietro */
+body[data-foto="1"] #foto { transform-origin: 60% 40%; animation: kenburns var(--durata-kenburns) var(--curva-lenta) infinite alternate; will-change: transform; }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.14) translate(-3%, -2%); } }
+@media (prefers-reduced-motion: reduce) { body[data-foto="1"] #foto { animation: none; } }
+#riposo p { font-size: var(--tv-testo-riposo); font-weight: var(--peso-titolo); }
+#offline { position: fixed; z-index: 3; right: 1.5vh; bottom: 1.5vh; width: 1.2vh; height: 1.2vh; border-radius: 50%; background: var(--tv-offline); display: none; }
+body[data-offline="1"] #offline { display: block; }
+
+/* Colonna destra: riquadro di un servizio (es. numero dell'Eliminacode, guscio.ts lo sposta qui) e QR sotto; senza
+   riquadro non esiste, il contenuto prende tutta la larghezza e il QR va piccolo nel piede (A136(5), mockup). */
+#lato { grid-area: lato; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: var(--tv-misura-spazio); min-width: 0; min-height: 0; overflow: hidden; position: relative; z-index: 2; }
+/* QR: guscio.ts lo mette sotto il riquadro della coda (#lato, 11vh), senza coda come tile a sé accanto al piede, nel piede solo se lì c'è la barra */
+/* senza QR la coda chiude in basso col piede: niente riga vuota col suo spazio sotto (A141) */
+body[data-qr="0"] #lato { grid-template-rows: minmax(0, 1fr); }
+#qr { margin: 0; min-width: 0; background: var(--tv-qr-chiaro); color: var(--tv-qr-scuro); }
+#qr[hidden] { display: none; }
+#lato > #qr:not([hidden]) { grid-row: 2; padding: 1.6vh; border-radius: var(--tv-misura-raggio); display: grid; grid-template-columns: var(--tv-misura-qr-lato) minmax(0, 1fr); gap: 1.4vh; align-items: center; }
+/* senza coda il QR è un tile a sé nella colonna destra, nella riga del piede e alto come lui (A141, «Solo menu») */
+/* padding a sinistra ≥ 1,4vh: col raggio del tile (3vh) l'angolo del QR resta sul bianco, o la zona di quiete si
+   scurisce e il QR non si legge (player.spec «si legge davvero») */
+body > #qr:not([hidden]) { grid-column: 2; grid-row: piede; min-height: 0; overflow: hidden; padding: .5vh 1.4vh .5vh 1.6vh; border-radius: var(--tv-misura-raggio); display: flex; gap: 1vh; align-items: center; }
+body > #qr #qr-svg { height: 100%; width: auto; aspect-ratio: 1; }
+body > #qr figcaption { white-space: nowrap; }
+#piede > #qr:not([hidden]) { flex: none; margin-left: auto; padding: .5vh 1.4vh .5vh .5vh; border-radius: var(--tv-misura-raggio-piccolo); height: var(--tv-misura-qr-piede); display: flex; gap: 1vh; align-items: center; }
+#qr-svg { display: block; fill: var(--tv-qr-scuro); shape-rendering: crispEdges; }
+#lato > #qr #qr-svg { width: 100%; height: auto; }
+#piede > #qr #qr-svg { height: 100%; width: auto; aspect-ratio: 1; }
+#qr figcaption { min-width: 0; line-height: 1.15; }
+#piede > #qr figcaption { white-space: nowrap; }
+#qr-testo { display: block; font-size: var(--tv-testo-qr); font-weight: var(--peso-forte); overflow-wrap: break-word; }
+#qr small { display: block; margin-top: .4vh; font-size: var(--tv-testo-qr-sotto); opacity: .7; }
+/* Riquadro pieno nel colore del negozio, alto quanto la colonna (owner 12/11: chi aspetta deve distinguerlo dal
+   contenuto a colpo d'occhio, o salta la fila): il contenuto resta sul fondo scuro, solo la coda è piena. */
+#lato > .zona[data-forma="riquadro"] {
+  grid-row: 1; align-self: stretch; display: grid; place-items: stretch; align-content: center; min-width: 0; min-height: 0; overflow: hidden; padding: 2.6vh 2.4vh;
+  container-type: inline-size;
+  border-radius: var(--tv-misura-raggio); background: var(--accento); color: var(--su-accento);
+}
+.zona[data-forma="primo-piano"] {
+  display: grid; place-items: center; position: fixed; z-index: 3; inset: 0; padding: 4vh 6vh; background: var(--sfondo);
+}
+
+/* Piede «Dove sono» (A141): la sezione di adesso, i suoi pallini (o «3/9»), cosa viene dopo; altezza fissa anche vuoto. */
+#piede { grid-area: piede; display: flex; align-items: center; gap: var(--tv-misura-spazio); padding: 0 var(--tv-misura-spazio); min-width: 0; position: relative; z-index: 1; font-size: var(--tv-testo-barra); }
+/* larghezze fisse: «Menu» → «Chi siamo» o 3 pallini → 1 + «3/9» non spostano il resto del piede (Niente salti); spariscono
+   solo se sulla TV non gira niente. contain: strict = il pallino che si allunga rifà il layout solo qui (A136(6)) */
+body:not([data-gira="1"]) :is(#dove, #segno) { display: none; }
+#dove { flex: none; width: 9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--tv-testo-dove); font-weight: var(--peso-forte); color: var(--testo); }
+#segno { flex: none; width: var(--tv-misura-pallini); height: calc(var(--tv-misura-pallino) * 1.6); display: flex; gap: 1.4vh; align-items: center; overflow: hidden; contain: strict; }
+#pallini { display: flex; gap: 1vh; align-items: center; }
+#conto { font-size: var(--tv-testo-dove); color: var(--testo-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pallino {
+  width: var(--tv-misura-pallino); height: var(--tv-misura-pallino); border-radius: var(--tv-misura-pallino); flex: none;
+  background: var(--linea); position: relative; overflow: hidden;
+  transition: width var(--durata-media) var(--curva-entra), background-color var(--durata-media) var(--curva-entra);
+}
+.pallino.fatto { background: color-mix(in srgb, var(--testo) 55%, transparent); }
+.pallino.ora { width: var(--tv-misura-pallino-ora); }
+.pallino i { position: absolute; inset: 0; background: var(--testo); transform-origin: left; transform: scaleX(0); }
+@media (prefers-reduced-motion: reduce) { .pallino.ora i { transform: none; } .pallino { transition: none; } }
+#poi { flex: none; width: 13em; margin-left: auto; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--tv-testo-dove); color: var(--testo-2); }
+#poi[hidden] { display: none; }
+#poi b { color: var(--testo); font-weight: var(--peso-forte); }
+/* col testo che scorre la scritta «poi» sta dopo di lui: il margine automatico non serve */
+.b-testo:not([hidden]) ~ #poi { margin-left: 0; }
+
+/* Aspetto: nome e logo (GRUPPI_ASPETTO in src/core/aspetto.ts; la miniatura del pannello fa lo stesso) */
+body[data-testata="centro"] header { justify-content: center; }
+body[data-testata="nascosta"] header { display: none; }
+body[data-logo="grande"] { --tv-misura-testa: var(--tv-misura-testa-grande); }
+body[data-logo="grande"] #logo { height: 12vh; }
+body[data-logo="grande"] #nome { font-size: var(--tv-testo-nome-grande); }
+
+/* Disposizione "Foto grande": la foto riempie lo schermo, scritte chiare su un velo (leggibili con ogni foto e colore) */
+/* la foto è un blocco come gli altri: nei margini della griglia, stesso raggio (tv-misura margine/raggio) */
+/* la foto è lei il tile: niente respiro intorno, il tile non si vede due volte; solo mentre nel contenuto c'è lo
+   Schermo (data-foto resta "1" quando girano gli altri servizi, che tengono il loro tile) */
+body[data-layout="foto"][data-foto="1"] main:not(:has(> .zona:not([hidden]):not([data-servizio="schermo"]))) { place-items: stretch; position: relative; padding: 0; background: none; }
+body[data-layout="foto"][data-foto="1"] #slide { display: block; position: relative; height: 100%; }
+body[data-layout="foto"][data-foto="1"] .cornice { position: absolute; inset: 0; height: 100%; }
+/* velo fermo sopra tutta la foto (non si muove con lei); sfumatura a più gradini: niente righe sulla TV */
+body[data-layout="foto"][data-foto="1"] .cornice::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, var(--tv-velo-foto) 0%, var(--tv-velo-foto) 30%,
+    color-mix(in srgb, var(--tv-velo-foto) 85%, transparent) 42%, color-mix(in srgb, var(--tv-velo-foto) 65%, transparent) 56%,
+    color-mix(in srgb, var(--tv-velo-foto) 50%, transparent) 72%, color-mix(in srgb, var(--tv-velo-foto) 42%, transparent) 100%);
+}
+/* qui la foto è il contenuto e riempie già l'area: le scritte restano alla misura dei token (A136(12)) */
+body[data-layout="foto"][data-foto="1"] #slide { --tv-riempi-max: 1; }
+body[data-layout="foto"][data-foto="1"] .testi {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 18vh 6vh 5vh; text-align: left;
+}
+body[data-layout="foto"][data-foto="1"] .testi, body[data-layout="foto"][data-foto="1"] #prezzo,
+body[data-layout="foto"][data-foto="1"] #per-unita { color: var(--tv-su-foto); }
+
+/* Disposizione "Listino": tutte le offerte a righe, nome a sinistra e prezzo a destra */
+#listino[hidden] { display: none; }
+body[data-layout="listino"] main { place-items: stretch; text-align: left; }
+#listino { width: 100%; align-self: center; }
+#righe { list-style: none; padding: 0; display: grid; gap: 1.2vh; }
+#righe li {
+  display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 3vw;
+  padding-bottom: 1.2vh; border-bottom: 0.3vh solid color-mix(in srgb, var(--testo) 25%, transparent);
+}
+.l-testi { display: grid; min-width: 0; }
+.l-nome { font-size: calc(var(--tv-testo-listino) * var(--riempi, 1)); font-weight: 800; line-height: 1.1; overflow-wrap: anywhere; }
+.l-sotto { font-size: calc(var(--tv-testo-listino-sotto) * var(--riempi, 1)); line-height: 1.25; opacity: .85; }
+.l-sotto:empty { display: none; }
+.l-prezzo { font-size: calc(var(--tv-testo-listino-prezzo) * var(--riempi, 1)); font-weight: 900; color: var(--accento); font-variant-numeric: tabular-nums; }
+
+/* Disposizione "Lavagna": gesso su lavagna, colori suoi (il nome del negozio resta nei colori del negozio) */
+body[data-layout="lavagna"] {
+  --sfondo: var(--tv-lavagna); --testo: var(--tv-gesso); --accento: var(--tv-gesso-prezzo); --su-accento: var(--tv-su-gesso-prezzo);
+  background-image:
+    radial-gradient(ellipse at 20% 30%, color-mix(in srgb, var(--tv-gesso) 6%, transparent), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, color-mix(in srgb, var(--tv-gesso) 5%, transparent), transparent 55%);
+}
+body[data-layout="lavagna"] main { font-family: var(--font-lavagna); }
+body[data-layout="lavagna"] #titolo, body[data-layout="lavagna"] #prezzo { font-weight: 700; }
+body[data-layout="lavagna"] .cornice { border-radius: var(--tv-misura-raggio-piccolo); transform: rotate(-1.5deg); box-shadow: 0 1vh 3vh var(--tv-velo-foto); }
+
+/* Barra della TV: ora, orari di oggi, testo che scorre, meteo. Altezza e larghezze fisse: nulla si sposta quando arrivano i dati. */
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+#barra {
+  grid-area: barra; box-sizing: border-box; min-width: 0; position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: flex-end; gap: var(--tv-misura-spazio); padding: 0 var(--tv-misura-spazio);
+  color: var(--testo-2); font-size: var(--tv-testo-barra); line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+body[data-barra="nascosta"] #barra { display: none; }
+.b-ora { flex: none; min-width: var(--tv-misura-ora); text-align: right; font-weight: var(--peso-titolo); color: var(--testo); }
+.b-orari { flex: none; margin-left: auto; display: inline-flex; align-items: center; gap: .8vh; font-size: var(--tv-testo-barra); color: var(--testo-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.b-orari[data-aperto="1"]::before { content: ""; width: 1.2vh; height: 1.2vh; border-radius: 50%; background: var(--tv-aperto); }
+.b-orari[hidden], .b-testo[hidden], .b-meteo[hidden] { display: none; }
+.b-testo { flex: 1 1 0; min-width: 0; overflow: hidden; }
+#b-testo-t { display: inline-block; }
+#b-testo-t[data-scorre="1"] { padding-left: 100%; animation: scorri var(--scorri-durata) linear infinite; will-change: transform; }
+@keyframes scorri { to { transform: translateX(-100%); } }
+.b-meteo { flex: none; width: var(--tv-misura-meteo); display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 1vh; }
+.b-icona { width: 4.4vh; height: 4.4vh; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.b-meteo[data-stato="attesa"] .b-icona, .b-meteo[data-stato="attesa"] #b-gradi { visibility: hidden; }
+.b-credito { grid-column: 1 / -1; font-size: var(--tv-testo-barra-credito); }
+#b-gradi { font-weight: var(--peso-titolo); }
+
+/* Temi stagionali (colori in design/tokens.json → temi): carattere dei titoli, decorazioni fisse e canvas (tv/particelle.ts) */
+#nome, #titolo, #prezzo, .l-nome, .l-prezzo, .mn-tv-titolo, .mn-tv-prezzo, .eq-numero, .v-rtesto, .v-anno, .v-titolo, #b-gradi, .b-ora { font-family: var(--font-titolo, var(--font-tv-titolo)); }
+body[data-layout="lavagna"] { --font-titolo: var(--font-lavagna); }
+body[data-tema="natale"] { --font-titolo: var(--font-serif); }
+body[data-tema="natale"] :is(header, body[data-barra="sopra"]:not([data-testata="basso"]) #barra) { border-bottom: 0.9vh dotted var(--accento); }
+body[data-tema="natale"] #piede { border-top: 0.9vh dotted var(--accento); }
+body[data-tema="pasqua"], body[data-tema="estate"] { --font-titolo: var(--font-rotondo); }
+body[data-tema="pasqua"] header {
+  background-image: radial-gradient(circle at 50% 0, var(--sfondo) 0 1.1vh, transparent 1.15vh);
+  background-size: 3.2vh 1.6vh; background-repeat: repeat-x; background-position: 0 100%;
+}
+body[data-tema="pasqua"] #piede { border-top: 0.8vh dashed var(--accento); }
+body[data-tema="estate"] :is(header, body[data-barra="sopra"]:not([data-testata="basso"]) #barra) { border-bottom: 0.8vh solid var(--accento); }
+body[data-tema="estate"] main::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 93% 4%, color-mix(in srgb, var(--accento) 38%, transparent) 0, transparent 38%);
+}
+body[data-tema="saldi"], body[data-tema="blackfriday"] { --font-titolo: var(--font-pesante); }
+body[data-tema="saldi"] #nome, body[data-tema="blackfriday"] #nome { text-transform: uppercase; letter-spacing: .08em; }
+body[data-tema="saldi"] header { background-image: repeating-linear-gradient(135deg, transparent 0 2.4vh, color-mix(in srgb, var(--accento) 22%, transparent) 2.4vh 4.8vh); }
+body[data-tema="saldi"] #piede { border-top: 1vh solid var(--accento); }
+body[data-tema="blackfriday"] :is(header, body[data-barra="sopra"]:not([data-testata="basso"]) #barra) { border-bottom: 1vh solid var(--accento); }
+body[data-tema="blackfriday"] #piede { border-top: 1vh solid var(--accento); }
+body[data-tema="saldi"] main::after, body[data-tema="blackfriday"] main::after {
+  position: absolute; top: 4vh; right: -7vh; z-index: 1; pointer-events: none; transform: rotate(35deg);
+  padding: 0.6vh 11vh; background: var(--accento); color: var(--sfondo);
+  font-family: var(--font-pesante); font-size: var(--tv-testo-barra); letter-spacing: .12em;
+}
+body[data-tema="saldi"] main::after { content: "SALDI"; }
+body[data-tema="blackfriday"] main::after { content: "BLACK FRIDAY"; }

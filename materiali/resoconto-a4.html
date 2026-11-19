@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Cosa è cambiato</title>
+<style>
+  /* Stesso stile dell'analisi (analisi-a4.html): A4, font di sistema. Il verso ha sempre la parola, non solo il colore. */
+  @page { size: A4; margin: 12mm; }
+  :root { --inchiostro: #1c1c1e; --secondario: #4a4a4f; --accento: #0062cc; --fondo: #f2f2f7; --bene: #1b7f3b; --male: #b3261e; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color: var(--inchiostro); font-size: 12pt; line-height: 1.35; }
+  h1 { font-size: 25pt; line-height: 1.1; }
+  .nome { font-size: 17pt; color: var(--accento); font-weight: 700; margin-top: 2mm; }
+  .fonte { font-size: 10pt; color: var(--secondario); margin-top: 1.5mm; }
+  .titolo { font-size: 20pt; font-weight: 700; margin-top: 6mm; padding: 4mm 6mm; background: var(--fondo); border-radius: 3mm; }
+  table { width: 100%; border-collapse: collapse; margin: 6mm 0; }
+  th { text-align: left; font-size: 10pt; color: var(--secondario); padding: 0 2mm 1.5mm; border-bottom: 0.3mm solid #d1d1d6; }
+  td { padding: 2.6mm 2mm; border-bottom: 0.3mm solid #d1d1d6; vertical-align: top; }
+  td:first-child { font-weight: 700; width: 38%; }
+  td:last-child { font-weight: 700; white-space: nowrap; }
+  .meglio td:last-child { color: var(--bene); }
+  .peggio td:last-child { color: var(--male); }
+  h2 { font-size: 16pt; margin-bottom: 2mm; }
+  #fatto { background: var(--fondo); border-radius: 3mm; padding: 4mm 4mm 4mm 10mm; }
+  #fatto li { margin: 1.2mm 0; }
+  .contatti { margin-top: 6mm; padding: 5mm 6mm; border: 0.6mm solid var(--accento); border-radius: 3mm; display: flex; justify-content: space-between; align-items: center; gap: 6mm; }
+  .contatti p:first-child { font-size: 13pt; font-weight: 700; }
+  .contatti .tel { color: var(--accento); text-align: right; }
+</style>
+</head>
+<body>
+  <h1>Cosa è cambiato</h1>
+  <p class="nome" data-campo="nome"></p>
+  <p class="fonte" data-campo="fonte"></p>
+  <p class="titolo" data-campo="titolo"></p>
+  <table>
+    <thead><tr><th>Voce</th><th data-campo="dal"></th><th data-campo="al"></th><th></th></tr></thead>
+    <tbody id="voci"></tbody>
+  </table>
+  <h2>Cosa abbiamo fatto</h2>
+  <ul id="fatto"></ul>
+  <div class="contatti">
+    <p data-campo="agenzia"></p>
+    <p class="tel" data-campo="contatto"></p>
+  </div>
+</body>
+</html>

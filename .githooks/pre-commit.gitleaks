@@ -1,0 +1,13 @@
+#!/bin/sh
+# Blocks a commit whose staged changes contain a secret (gitleaks). Fails closed if gitleaks is missing.
+gl=$(command -v gitleaks 2>/dev/null)
+[ -n "$gl" ] || gl="$HOME/.local/bin/gitleaks"
+if [ ! -x "$gl" ]; then
+    echo "pre-commit: gitleaks not found -- commit blocked." >&2
+    exit 1
+fi
+if ! "$gl" protect --staged --redact --no-banner --log-level warn -v; then
+    echo "pre-commit: possible secret in the staged changes (values redacted)." >&2
+    exit 1
+fi
+exit 0

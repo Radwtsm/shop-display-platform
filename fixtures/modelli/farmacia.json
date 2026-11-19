@@ -1,0 +1,14 @@
+{
+  "versione": 1,
+  "negozio": {
+    "nome": "Farmacia Demo",
+    "colori": { "primario": "#0f5132", "accento": "#7ee2a8", "sfondo": "#06281a", "testo": "#f1fff7" }
+  },
+  "secondiPerSlide": 10,
+  "slides": [
+    { "id": "pressione", "titolo": "Misurazione della pressione", "nota": "Chiedi al banco", "attiva": true },
+    { "id": "vitamina", "titolo": "Vitamina C 1000 mg", "prezzo": 790, "nota": "30 compresse", "attiva": true },
+    { "id": "solari", "titolo": "Solari: -20% su tutta la linea", "nota": "Fino a fine mese", "attiva": true },
+    { "id": "turni", "titolo": "Farmacie di turno: vedi il cartello in vetrina", "attiva": true }
+  ]
+}

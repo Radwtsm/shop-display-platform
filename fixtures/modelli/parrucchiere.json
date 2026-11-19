@@ -1,0 +1,14 @@
+{
+  "versione": 1,
+  "negozio": {
+    "nome": "Salone Demo",
+    "colori": { "primario": "#2b2b2b", "accento": "#e9c46a", "sfondo": "#111111", "testo": "#fafafa" }
+  },
+  "secondiPerSlide": 10,
+  "slides": [
+    { "id": "piega", "titolo": "Piega", "prezzo": 1800, "nota": "da", "attiva": true },
+    { "id": "taglio-piega", "titolo": "Taglio + piega", "prezzo": 3000, "attiva": true },
+    { "id": "colore", "titolo": "Colore", "prezzo": 4500, "nota": "da · su appuntamento", "attiva": true },
+    { "id": "prenota", "titolo": "Prenota il prossimo appuntamento al banco", "attiva": true }
+  ]
+}

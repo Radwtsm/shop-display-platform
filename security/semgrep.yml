@@ -1,0 +1,41 @@
+# Regole nostre, offline: errori da non rifare (METODO → Insidie). Si eseguono a ogni commit.
+rules:
+  - id: html-da-stringa
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Testo inserito come HTML (XSS). Usa textContent o crea gli elementi.
+    pattern-either:
+      - pattern: $X.innerHTML = $Y
+      - pattern: $X.outerHTML = $Y
+      - pattern: $X.insertAdjacentHTML(...)
+      - pattern: document.write(...)
+  - id: codice-da-stringa
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Codice eseguito da una stringa.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+      - pattern: setTimeout("...", ...)
+  - id: casuale-non-sicuro
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Math.random non è sicuro per token o id segreti; usa crypto.randomBytes / crypto.getRandomValues.
+    pattern: Math.random()
+  - id: confronto-segreto-non-costante
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Confronto di un token con === (timing attack); usa timingSafeEqual.
+    pattern-either:
+      - pattern: $T === $O.token
+      - pattern: $O.token === $T
+      - pattern: $H["x-token"] === $T
+  - id: comandi-di-sistema
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Il prodotto non lancia comandi di sistema.
+    paths: { include: [src/] }
+    pattern-either:
+      - pattern: require("child_process")
+      - pattern: import $X from "node:child_process"
+      - pattern: import { $...X } from "node:child_process"

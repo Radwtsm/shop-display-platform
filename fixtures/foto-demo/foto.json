@@ -1,0 +1,9 @@
+{
+  "panificio": {
+    "colazione": "cornetto.jpg",
+    "focaccia": "focaccia.jpg",
+    "altamura": "pane.jpg",
+    "pizza": "pizza.jpg",
+    "torte": "torta.jpg"
+  }
+}

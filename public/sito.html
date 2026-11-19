@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il nostro negozio</title>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/sito.css">
+<script type="module" src="/assets/sito.js"></script>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<header class="testata">
+  <img id="logo" alt="" hidden>
+  <h1 id="nome"></h1>
+  <p id="aperto" class="aperto" hidden></p>
+</header>
+<main id="contenuto">
+  <p id="errore" class="errore" role="alert" hidden>Non riesco a caricare il sito in questo momento. Riprova tra poco.</p>
+  <section id="storia" aria-labelledby="t-storia" hidden>
+    <img id="foto" alt="" hidden>
+    <div>
+      <h2 id="t-storia">La nostra storia</h2>
+      <p id="anno" class="anno" hidden></p>
+      <p id="storia-testo"></p>
+    </div>
+  </section>
+  <section id="orari" aria-labelledby="t-orari" hidden>
+    <h2 id="t-orari">Orari</h2>
+    <p id="orari-testo"></p>
+  </section>
+  <section id="dove" aria-labelledby="t-dove" hidden>
+    <h2 id="t-dove">Dove siamo</h2>
+    <address id="contatti"></address>
+    <ul id="mappe" class="azioni"></ul>
+  </section>
+  <section id="menu" aria-labelledby="t-menu" hidden>
+    <h2 id="t-menu">Il menu</h2>
+    <p><a id="link-menu" class="bottone" href="/menu.html">Guarda il menu</a></p>
+  </section>
+  <section id="recensioni" aria-labelledby="t-rec" hidden>
+    <h2 id="t-rec">Cosa dicono di noi</h2>
+    <p id="rec-media" class="media" hidden></p>
+    <ul id="rec-elenco" class="recensioni"></ul>
+    <p id="rec-fonte" class="fonte"></p>
+    <p><a id="rec-scrivi" class="bottone" href="#" hidden rel="noopener">Scrivi una recensione su Google</a></p>
+  </section>
+</main>
+<footer class="piede"><p id="piede"></p></footer>
+</body>
+</html>

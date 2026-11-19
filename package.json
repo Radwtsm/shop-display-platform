@@ -1,0 +1,44 @@
+{
+  "name": "shop-display-platform",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && node --experimental-strip-types src/piattaforma/server/main.ts",
+    "proposta": "DEMO_SERVIZI=schermo,vetrina,menu-qr npm start",
+    "personalizza": "node --experimental-strip-types src/servizi/schermo/personalizza.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "mirati": "node scripts/mirati.mjs",
+    "misura": "node scripts/misura.mjs",
+    "e2e": "npm run build && playwright test",
+    "check": "npm run typecheck && npm run lint && npm run licenze && npm run semgrep && npm test && npm run e2e",
+    "lint": "node scripts/lint-css.mjs",
+    "licenze": "node scripts/licenze.mjs",
+    "semgrep": "SEMGREP_ENABLE_VERSION_CHECK=0 semgrep scan --config security/semgrep.yml --metrics=off --error --quiet src scripts",
+    "sicurezza": "osv-scanner scan source --lockfile package-lock.json && SEMGREP_ENABLE_VERSION_CHECK=0 semgrep scan --config p/owasp-top-ten --config p/typescript --config p/nodejs --metrics=off --error --quiet src scripts",
+    "sbom": "npm sbom --sbom-format cyclonedx --omit dev",
+    "qr": "node scripts/qr.mjs",
+    "foglio": "npm run build && node scripts/foglio.mjs",
+    "tv": "node scripts/tv.mjs",
+    "analisi": "node scripts/analisi.ts",
+    "resoconto": "node scripts/resoconto.ts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.0",
+    "@types/node": "26.6.5",
+    "@types/pngjs": "6.0.5",
+    "esbuild": "0.28.2",
+    "jsqr": "1.4.0",
+    "pngjs": "7.0.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  },
+  "dependencies": {
+    "qrcode-generator": "2.0.4"
+  }
+}

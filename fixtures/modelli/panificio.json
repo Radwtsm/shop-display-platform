@@ -1,0 +1,29 @@
+{
+  "versione": 1,
+  "negozio": {
+    "nome": "Panificio Demo",
+    "colori": { "primario": "#7a3e12", "accento": "#ffd27a", "sfondo": "#1f140c", "testo": "#fff8ee" }
+  },
+  "secondiPerSlide": 8,
+  "slides": [
+    {
+      "id": "colazione",
+      "titolo": "Cornetto + cappuccino",
+      "prezzo": 280,
+      "nota": "Fino alle 11",
+      "attiva": true,
+      "fasce": [{ "giorni": [1, 2, 3, 4, 5, 6, 7], "da": "06:30", "a": "11:00" }]
+    },
+    { "id": "focaccia", "titolo": "Focaccia genovese", "prezzo": 250, "quantita": { "valore": 100, "unita": "g" }, "attiva": true },
+    { "id": "altamura", "titolo": "Pane di Altamura", "prezzo": 420, "quantita": { "valore": 1000, "unita": "g" }, "attiva": true },
+    {
+      "id": "pizza",
+      "titolo": "Pizza al taglio",
+      "prezzo": 180,
+      "nota": "Dalle 11:30 alle 14:30",
+      "attiva": true,
+      "fasce": [{ "giorni": [1, 2, 3, 4, 5, 6], "da": "11:30", "a": "14:30" }]
+    },
+    { "id": "torte", "titolo": "Torte su ordinazione", "nota": "Chiedi al banco", "attiva": true }
+  ]
+}

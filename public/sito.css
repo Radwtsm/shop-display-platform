@@ -1,0 +1,34 @@
+/* Minisito pubblico del negozio (public/sito.html). Colori del negozio via variabili, il resto da tokens.css. */
+:root { --primario: var(--tv-primario); --accento: var(--tv-accento); --sfondo: var(--tv-sfondo); --testo: var(--tv-testo); }
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--sfondo); color: var(--testo); font-family: var(--font-sistema); font-size: var(--testo-corpo); line-height: 1.5; }
+.salta { position: absolute; left: var(--spazio-3); top: -10rem; background: var(--sfondo); color: var(--testo); padding: var(--spazio-3); border: 2px solid var(--testo); }
+.salta:focus { top: var(--spazio-3); }
+.testata { background: var(--primario); color: var(--testo); display: flex; flex-wrap: wrap; align-items: center; gap: var(--spazio-3); padding: var(--spazio-5) var(--spazio-4); }
+.testata img { height: 3.5rem; width: auto; max-width: 40vw; object-fit: contain; }
+.testata h1 { font-size: var(--testo-titolo-grande); font-weight: var(--peso-titolo); overflow-wrap: anywhere; flex: 1 1 12rem; }
+.aperto { font-weight: var(--peso-forte); border: 2px solid currentColor; border-radius: var(--raggio-pillola); padding: var(--spazio-1) var(--spazio-3); }
+main { max-width: 44rem; margin: 0 auto; padding: var(--spazio-4); display: grid; gap: var(--spazio-6); }
+main > section { display: grid; gap: var(--spazio-3); padding-top: var(--spazio-4); border-top: 3px solid var(--accento); }
+main > section[hidden], .errore[hidden], [hidden] { display: none; }
+h2 { font-size: var(--testo-titolo-sezione); font-weight: var(--peso-titolo); }
+#storia { grid-template-columns: 1fr; }
+#storia img { width: 100%; max-height: 22rem; object-fit: cover; border-radius: var(--raggio-foglio); }
+.anno { font-size: var(--testo-titolo-sezione); font-weight: var(--peso-titolo); }
+address { font-style: normal; display: grid; gap: var(--spazio-1); }
+a { color: var(--testo); text-underline-offset: 0.2em; display: inline-flex; align-items: center; min-height: var(--tocco-minimo); min-width: var(--tocco-minimo); }
+a:focus-visible { outline: 3px solid var(--testo); outline-offset: 3px; }
+.azioni { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--spazio-3); }
+.bottone { display: inline-flex; align-items: center; min-height: var(--tocco-minimo); padding: 0 var(--spazio-4); border: 2px solid var(--testo); border-radius: var(--raggio-pillola); font-weight: var(--peso-forte); text-decoration: none; }
+.recensioni { list-style: none; padding: 0; display: grid; gap: var(--spazio-4); }
+.recensioni li { display: grid; gap: var(--spazio-1); padding: var(--spazio-3) var(--spazio-4); border: 1px solid color-mix(in srgb, var(--testo) 30%, transparent); border-radius: var(--raggio-gruppo); }
+.stelle { letter-spacing: 0.15em; }
+.autore { font-weight: var(--peso-forte); }
+.quando, .fonte { font-size: var(--testo-etichetta); }
+.media { font-weight: var(--peso-forte); }
+.errore { border: 2px solid var(--testo); padding: var(--spazio-3); }
+.piede { max-width: 44rem; margin: 0 auto; padding: var(--spazio-4) var(--spazio-4) var(--spazio-6); font-size: var(--testo-etichetta); }
+@media (min-width: 52rem) {
+  #storia:has(img:not([hidden])) { grid-template-columns: 1fr 1.2fr; gap: var(--spazio-5); align-items: start; }
+  main { padding: var(--spazio-6) var(--spazio-4); }
+}

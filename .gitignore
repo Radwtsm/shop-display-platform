@@ -1,0 +1,9 @@
+node_modules/
+public/assets/
+data/
+test-results/
+playwright-report/
+.DS_Store
+public/tokens.css
+sbom*.json
+materiali/out/

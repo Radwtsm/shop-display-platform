@@ -1,0 +1,2 @@
+# Disallineamenti di design NOTI (controllo dei CSS): una riga = un problema già in TASKLIST (D1, D2…).
+# Può solo calare: un problema nuovo blocca il commit; uno corretto va tolto da qui (o il controllo fallisce).

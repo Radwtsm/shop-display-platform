@@ -1,0 +1,24 @@
+{
+  "versione": 1,
+  "categorie": [
+    { "id": "colazione", "nome": "Colazione" },
+    { "id": "salato", "nome": "Panini e pizze" },
+    { "id": "bevande", "nome": "Bevande" },
+    { "id": "dolci", "nome": "Dolci" }
+  ],
+  "piatti": [
+    { "id": "cornetto", "nome": "Cornetto alla crema", "descrizione": "Sfoglia al burro, crema pasticcera", "prezzo": 150, "categoria": "colazione", "allergeni": ["glutine", "uova", "latte"] },
+    { "id": "cornetto-vegano", "nome": "Cornetto vegano", "descrizione": "Con marmellata di albicocche", "prezzo": 140, "categoria": "colazione", "allergeni": ["glutine"], "finitoIl": "2026-11-06" },
+    { "id": "yogurt", "nome": "Yogurt con frutta", "prezzo": 330, "categoria": "colazione", "allergeni": ["latte"] },
+    { "id": "focaccia", "nome": "Focaccia genovese", "descrizione": "Olio extravergine e sale", "prezzo": 250, "categoria": "salato", "allergeni": ["glutine"] },
+    { "id": "panino-tonno", "nome": "Panino al tonno", "descrizione": "Tonno, sedano, maionese", "prezzo": 450, "categoria": "salato", "allergeni": ["glutine", "pesce", "sedano", "uova", "senape"] },
+    { "id": "pizza-margherita", "nome": "Pizza margherita", "descrizione": "Pomodoro, mozzarella, basilico", "prezzo": 600, "categoria": "salato", "allergeni": ["glutine", "latte"] },
+    { "id": "insalata", "nome": "Insalata mista", "prezzo": 500, "categoria": "salato", "allergeni": [] },
+    { "id": "panino-del-giorno", "nome": "Panino del giorno", "descrizione": "Chiedi al banco", "prezzo": 480, "categoria": "salato", "allergeni": null },
+    { "id": "caffe", "nome": "Caffè", "prezzo": 120, "categoria": "bevande", "allergeni": [] },
+    { "id": "cappuccino", "nome": "Cappuccino", "prezzo": 150, "categoria": "bevande", "allergeni": ["latte"] },
+    { "id": "vino", "nome": "Calice di vino bianco", "prezzo": 400, "categoria": "bevande", "allergeni": ["solfiti"] },
+    { "id": "torta-mandorle", "nome": "Torta di mandorle", "descrizione": "Una fetta", "prezzo": 350, "categoria": "dolci", "allergeni": ["frutta-a-guscio", "uova"] },
+    { "id": "tiramisu", "nome": "Tiramisù", "prezzo": 400, "categoria": "dolci", "allergeni": ["glutine", "uova", "latte"] }
+  ]
+}

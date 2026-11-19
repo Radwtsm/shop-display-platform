@@ -1,0 +1,103 @@
+/* Kit proposta (public/proposta.html): i servizi del negozio col suo marchio, da mostrare sul telefono alla visita.
+   Cornice della pagina con i colori di sistema; testata e fogli con i colori del negozio (variabili da applicaColori). */
+:root { --primario: var(--tv-primario); --accento: var(--tv-accento); --sfondo: var(--tv-sfondo); --testo: var(--tv-testo); }
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sistema); font-size: var(--testo-corpo); line-height: 1.4;
+  background: var(--colore-sfondo-pagina); color: var(--colore-testo-primario); min-height: 100dvh;
+}
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--colore-fuoco); outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+.navigazione {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; justify-content: space-around;
+  padding: var(--spazio-1) var(--spazio-2) calc(var(--spazio-1) + env(safe-area-inset-bottom));
+  background: var(--colore-sfondo-gruppo); border-top: 1px solid var(--colore-separatore);
+}
+.navigazione a {
+  display: grid; justify-items: center; gap: 2px; flex: 1 1 0; min-width: 0; min-height: var(--tocco-minimo);
+  padding: var(--spazio-1) var(--spazio-1); color: var(--colore-testo-secondario); text-decoration: none;
+  font-size: var(--testo-etichetta); border-radius: var(--raggio-gruppo);
+}
+.navigazione span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.navigazione svg { width: 1.5rem; height: 1.5rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.navigazione a[aria-current=page] { color: var(--colore-azione); }
+
+main { padding: 0 0 calc(6rem + env(safe-area-inset-bottom)); max-width: 64rem; }
+.testata { display: flex; align-items: center; gap: var(--spazio-3); padding: var(--spazio-5) var(--spazio-4); background: var(--primario); color: var(--testo); }
+.logo { height: 3.5rem; width: auto; max-width: 30vw; object-fit: contain; }
+.testata > div { min-width: 0; }
+.sopratitolo { font-size: var(--testo-etichetta); }
+h1 { font-size: var(--testo-titolo-grande); font-weight: var(--peso-titolo); overflow-wrap: anywhere; }
+.errore { margin: var(--spazio-4); padding: var(--spazio-3); border: 2px solid var(--colore-pericolo); border-radius: var(--raggio-gruppo); }
+
+.sezione { display: grid; gap: var(--spazio-3); padding: var(--spazio-5) var(--spazio-4); justify-items: center; }
+.sezione > h2, .sezione > .spiega { justify-self: stretch; }
+h2 { font-size: var(--testo-titolo-sezione); font-weight: var(--peso-titolo); }
+.spiega { color: var(--colore-testo-secondario); }
+
+/* telefono finto per sito e menu: la pagina vera dentro, scorre da sola */
+.telefono {
+  width: min(100%, 25rem); height: clamp(28rem, 68dvh, 48rem); border: 0.6rem solid var(--colore-testo-primario);
+  border-radius: 2.2rem; overflow: hidden; background: var(--colore-sfondo-gruppo);
+}
+.telefono iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* TV: la pagina della TV a 1920×1080, rimpicciolita da proposta.ts per stare nella cornice */
+.cornice-tv { width: 100%; padding: 0.6rem; background: var(--colore-testo-primario); border-radius: var(--raggio-foglio); }
+.schermo-tv { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--sfondo); }
+.schermo-tv iframe { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; transform-origin: 0 0; pointer-events: none; }
+
+/* fogli A5 (148×210 mm) coi colori del negozio */
+.foglio {
+  width: min(100%, 25rem); aspect-ratio: 148 / 210; display: flex; flex-direction: column; align-items: center; gap: var(--spazio-3);
+  padding: var(--spazio-5) var(--spazio-4); background: var(--sfondo); color: var(--testo);
+  border: 1px solid var(--colore-separatore); border-radius: var(--spazio-1); overflow: hidden;
+}
+.foglio-logo { height: 3rem; width: auto; max-width: 60%; object-fit: contain; }
+.foglio-nome { font-size: var(--testo-titolo-sezione); font-weight: var(--peso-titolo); text-align: center; overflow-wrap: anywhere; }
+.foglio-qr { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: var(--spazio-4); width: 100%; flex: 1; align-content: center; }
+.voce-qr { display: grid; justify-items: center; gap: var(--spazio-2); text-align: center; }
+.voce-qr svg { width: 100%; max-width: 8rem; aspect-ratio: 1; background: var(--tv-qr-chiaro); fill: var(--tv-qr-scuro); border-radius: var(--spazio-1); }
+.voce-qr strong { font-weight: var(--peso-forte); }
+.voce-qr span { font-size: var(--testo-etichetta); overflow-wrap: anywhere; }
+
+.volantino { align-items: stretch; }
+.volantino-testata { display: grid; justify-items: center; gap: var(--spazio-2); padding-bottom: var(--spazio-3); border-bottom: 3px solid var(--accento); }
+.volantino-offerte { list-style: none; padding: 0; display: grid; gap: var(--spazio-3); flex: 1; align-content: start; overflow: hidden; }
+.volantino-offerte li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--spazio-3); }
+.volantino-offerte img { width: 3.5rem; height: 3.5rem; object-fit: cover; border-radius: var(--spazio-1); }
+.volantino-offerte .titolo { font-weight: var(--peso-forte); overflow-wrap: anywhere; }
+.volantino-offerte .nota { display: block; font-size: var(--testo-etichetta); }
+.volantino-offerte .prezzo { font-weight: var(--peso-titolo); font-size: var(--testo-titolo-sezione); white-space: nowrap; }
+.volantino-piede { font-size: var(--testo-etichetta); text-align: center; display: grid; gap: var(--spazio-1); }
+
+.bottone {
+  min-height: var(--tocco-minimo); padding: 0 var(--spazio-5); border: 0; border-radius: var(--raggio-pillola);
+  background: var(--colore-azione); color: var(--colore-su-azione); font-weight: var(--peso-forte);
+}
+
+@media (min-width: 56.25rem) {
+  body { display: grid; grid-template-columns: 14rem 1fr; }
+  .navigazione {
+    position: sticky; top: 0; height: 100dvh; flex-direction: column; justify-content: flex-start; gap: var(--spazio-1);
+    padding: var(--spazio-5) var(--spazio-3); border-top: 0; border-right: 1px solid var(--colore-separatore);
+  }
+  .navigazione a { display: flex; flex: none; align-items: center; gap: var(--spazio-3); font-size: var(--testo-corpo); color: var(--colore-testo-primario); padding: var(--spazio-2) var(--spazio-3); }
+  .navigazione svg { width: 1.25rem; height: 1.25rem; color: var(--colore-azione); }
+  .navigazione a[aria-current=page] { background: var(--colore-sfondo-premuto); color: var(--colore-testo-primario); }
+  main { padding-bottom: var(--spazio-6); }
+  .testata { padding: var(--spazio-6); }
+  .sezione { padding: var(--spazio-6); }
+}
+
+/* stampa: solo il foglio della sezione aperta, a misura A5 */
+@page { size: A5; margin: 0; }
+@media print {
+  body { display: block; background: var(--sfondo); }
+  .navigazione, .testata, .errore, .sezione > h2, .spiega, .sezione > p { display: none; }
+  main, .sezione { padding: 0; }
+  .foglio { width: 148mm; height: 210mm; aspect-ratio: auto; border: 0; border-radius: 0; }
+}

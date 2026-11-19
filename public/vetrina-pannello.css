@@ -1,0 +1,30 @@
+/* Sezione Vetrina del pannello (caricata da src/servizi/vetrina/pannello.ts): area di testo, giorni, cartello A5. */
+.campo textarea {
+  border: 0; background: none; width: 100%; min-height: 8rem; padding: 0; resize: vertical;
+  font: inherit; font-size: var(--testo-corpo); color: inherit;
+}
+.campo textarea:focus-visible { outline: none; }
+.campo textarea::placeholder { color: var(--colore-testo-secondario); }
+a.riga { color: inherit; text-decoration: none; }
+.v-giorni { border: 0; margin: 0; padding: var(--spazio-2) var(--spazio-4); display: flex; flex-wrap: wrap; gap: var(--spazio-2); }
+.v-giorni legend { font-size: var(--testo-etichetta); color: var(--colore-testo-secondario); padding: 0; }
+.v-giorno { display: flex; align-items: center; gap: var(--spazio-1); min-height: var(--tocco-minimo); min-width: var(--tocco-minimo); padding: 0 var(--spazio-3); border: 1px solid var(--colore-separatore); border-radius: var(--raggio-pillola); }
+.v-giorno input { width: auto; min-height: 0; }
+.v-giorno:focus-within { box-shadow: 0 0 0 2px var(--colore-fuoco); }
+
+/* Cartello: sullo schermo non si vede, solo in stampa. */
+.v-cartello, .v-cartello[hidden] { display: none; }
+.v-c-voce { margin: 0; display: grid; justify-items: center; gap: var(--spazio-2); text-align: center; }
+.v-svg { display: block; width: 100%; height: auto; fill: var(--tv-qr-scuro); shape-rendering: crispEdges; }
+
+@media print {
+  @page { size: A5; margin: 10mm; }
+  body > *:not(main), #sezioni > *:not([data-servizio="vetrina"]) { display: none; }
+  [data-servizio="vetrina"] > *:not(.v-cartello) { display: none; }
+  [data-servizio="vetrina"] .v-cartello, [data-servizio="vetrina"] .v-cartello[hidden] { display: grid; gap: var(--spazio-5); justify-items: center; color: var(--tv-qr-scuro); background: var(--tv-qr-chiaro); }
+  .v-c-nome { font-size: var(--testo-titolo-grande); text-align: center; }
+  .v-c-qr { display: grid; grid-template-columns: repeat(auto-fit, minmax(45mm, 1fr)); gap: var(--spazio-5); width: 100%; }
+  .v-c-voce .v-svg { width: 50mm; background: var(--tv-qr-chiaro); }
+  .v-c-titolo { display: block; font-size: var(--testo-corpo); }
+  .v-c-sotto { display: block; font-size: var(--testo-etichetta); }
+}

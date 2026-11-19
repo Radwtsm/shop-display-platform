@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schermo</title>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/player.css">
+<link rel="stylesheet" href="/adatta.css">
+<script type="module" src="/assets/player.js"></script>
+</head>
+<body data-offline="0" data-barra="sopra">
+<canvas id="fx" aria-hidden="true"></canvas>
+<header><img id="logo" alt="" hidden><span id="iniziale" class="iniziale" aria-hidden="true" hidden></span><h1 id="nome"></h1><span id="b-orari" class="b-orari" hidden></span></header>
+<div id="barra">
+  <span id="b-meteo" class="b-meteo" data-stato="attesa" role="img" hidden>
+    <svg class="b-icona" viewBox="0 0 24 24" aria-hidden="true"><use id="b-icona-uso" href="#m-nuvole"/></svg>
+    <span id="b-gradi"></span>
+    <small class="b-credito">Meteo: Open-Meteo</small>
+  </span>
+  <span id="b-ora" class="b-ora"></span>
+</div>
+<main id="zone"></main>
+<aside id="lato"></aside>
+<footer id="piede">
+  <span id="dove"></span>
+  <div id="segno" aria-hidden="true"><div id="pallini"></div><span id="conto"></span></div>
+  <div id="b-testo" class="b-testo" hidden><span id="b-testo-t" data-scorre="0"></span></div>
+  <span id="poi" hidden>poi: <b id="poi-dove"></b></span>
+  <figure id="qr" hidden>
+    <svg id="qr-svg" aria-hidden="true"><path id="qr-path"/></svg>
+    <figcaption><b id="qr-testo"></b><small>inquadra col telefono</small></figcaption>
+  </figure>
+</footer>
+<div id="offline" aria-hidden="true"></div>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="m-sole" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></symbol>
+    <symbol id="m-luna" viewBox="0 0 24 24"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4 8.2 8.2 0 1 0 20 14.6z"/></symbol>
+    <symbol id="m-parziale" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3"/><path d="M8.5 2v1.4M2.5 8h1.4M4.3 3.8l1 1M12.7 3.8l-1 1"/><path d="M8.5 20a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 18 14a3 3 0 0 1-.5 6z"/></symbol>
+    <symbol id="m-nuvole" viewBox="0 0 24 24"><path d="M7.5 18a4 4 0 0 1-.4-8A5.6 5.6 0 0 1 18 11a3.6 3.6 0 0 1-.6 7z"/></symbol>
+    <symbol id="m-nebbia" viewBox="0 0 24 24"><path d="M7.5 12a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 17 6a3.3 3.3 0 0 1-.5 6z"/><path d="M4 16h16M6 20h12"/></symbol>
+    <symbol id="m-pioggia" viewBox="0 0 24 24"><path d="M7.5 13a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 17 7a3.3 3.3 0 0 1-.5 6z"/><path d="M8 16.5l-1 3M12 16.5l-1 3M16 16.5l-1 3"/></symbol>
+    <symbol id="m-neve" viewBox="0 0 24 24"><path d="M7.5 13a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 17 7a3.3 3.3 0 0 1-.5 6z"/><path d="M8 17.5v.01M12 19.5v.01M16 17.5v.01"/></symbol>
+    <symbol id="m-temporale" viewBox="0 0 24 24"><path d="M7.5 13a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 17 7a3.3 3.3 0 0 1-.5 6z"/><path d="M12.5 13.5L10 18h3l-1.5 4"/></symbol>
+  </defs>
+</svg>
+</body>
+</html>

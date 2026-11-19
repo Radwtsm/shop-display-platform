@@ -1,0 +1,16 @@
+{
+  "versione": 1,
+  "negozio": {
+    "nome": "Bar Demo",
+    "colori": { "primario": "#14532d", "accento": "#fbbf24", "sfondo": "#0b1f14", "testo": "#f0fdf4" }
+  },
+  "secondiPerSlide": 8,
+  "slides": [
+    { "id": "colazione", "titolo": "Cappuccino + brioche", "prezzo": 220, "nota": "Fino alle 11", "attiva": true,
+      "fasce": [{ "giorni": [1, 2, 3, 4, 5, 6, 7], "da": "06:30", "a": "11:00" }] },
+    { "id": "spremuta", "titolo": "Spremuta d'arancia", "prezzo": 300, "attiva": true },
+    { "id": "toast", "titolo": "Toast prosciutto e formaggio", "prezzo": 350, "attiva": true },
+    { "id": "aperitivo", "titolo": "Aperitivo con stuzzichini", "prezzo": 600, "nota": "Dalle 17:30", "attiva": true,
+      "fasce": [{ "giorni": [1, 2, 3, 4, 5, 6, 7], "da": "17:30", "a": "21:00" }] }
+  ]
+}

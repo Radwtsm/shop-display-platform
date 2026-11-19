@@ -1,0 +1,16 @@
+/* Sezione dell'Eliminacode nel pannello (caricata da src/servizi/eliminacode/pannello.ts). Token del guscio; il numero è il pezzo più grande della pagina. */
+.eq-attuale { background: var(--colore-sfondo-gruppo); border-radius: var(--raggio-foglio); padding: var(--spazio-4); text-align: center; border: 1px solid var(--colore-separatore); }
+.eq-p-etichetta { font-size: var(--testo-etichetta); color: var(--colore-testo-secondario); }
+.eq-p-numero { font-size: var(--testo-eq-numero-pannello); font-weight: 900; line-height: 1.1; font-variant-numeric: tabular-nums; color: var(--accento-pannello); }
+.eq-p-banco { font-size: var(--testo-corpo); height: 1.35em; line-height: 1.35; }
+.eq-banchi { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--spazio-2); margin-top: var(--spazio-4); }
+.eq-banchi[hidden] { display: none; }
+.eq-banchi button { min-height: var(--tocco-minimo); border-radius: var(--raggio-gruppo); background: var(--colore-sfondo-gruppo); border: 2px solid var(--colore-separatore); font-weight: var(--peso-forte); overflow-wrap: anywhere; }
+.eq-banchi button[aria-pressed="true"] { border-color: var(--accento-pannello); background: var(--accento-pannello); color: var(--su-accento-pannello); }
+.eq-prossimo { min-height: 6.5rem; margin-top: var(--spazio-4); font-size: var(--testo-titolo-grande); }
+.eq-prossimo:disabled { opacity: .6; }
+.eq-secondarie { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spazio-2); margin-top: var(--spazio-3); }
+.eq-secondarie .riga { justify-content: center; min-height: 3.5rem; border-radius: var(--raggio-gruppo); background: var(--colore-sfondo-gruppo); font-weight: var(--peso-forte); }
+.eq-secondarie .riga:disabled { opacity: .6; }
+.eq-impostazioni { margin-top: var(--spazio-2); }
+.eq-conferma { margin: auto; }

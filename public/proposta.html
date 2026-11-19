@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La nostra proposta</title>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/proposta.css">
+<script type="module" src="/assets/proposta.js"></script>
+</head>
+<body>
+<nav class="navigazione" aria-label="Cosa vi proponiamo">
+  <a href="#sito" data-sezione="sito" hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+    <span>Sito</span>
+  </a>
+  <a href="#menu" data-sezione="menu" hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3v18M6 8h2a2 2 0 0 0 2-2V3M14 3h4v18h-4z"/></svg>
+    <span>Menu</span>
+  </a>
+  <a href="#tv" data-sezione="tv" hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    <span>TV</span>
+  </a>
+  <a href="#cartello" data-sezione="cartello" hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2z"/></svg>
+    <span>Cartello</span>
+  </a>
+  <a href="#volantino" data-sezione="volantino" hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6z"/><path d="M9 11h7M9 15h7M9 19h4"/></svg>
+    <span>Volantino</span>
+  </a>
+</nav>
+
+<main id="contenuto">
+  <header class="testata">
+    <img id="logo" class="logo" alt="" hidden>
+    <div>
+      <p class="sopratitolo">Proposta per</p>
+      <h1 id="nome">Il vostro negozio</h1>
+    </div>
+  </header>
+  <p id="errore" class="errore" role="alert" hidden>Non riesco a caricare la proposta. Il server è acceso?</p>
+
+  <section id="sez-sito" class="sezione" aria-labelledby="t-sito" hidden>
+    <h2 id="t-sito">Il vostro sito</h2>
+    <p class="spiega">Una pagina con orari, dove siete, menu e recensioni. Si apre dai QR del banco.</p>
+    <div class="telefono"><iframe id="f-sito" title="Anteprima del sito" data-src="/sito.html"></iframe></div>
+  </section>
+
+  <section id="sez-menu" class="sezione" aria-labelledby="t-menu" hidden>
+    <h2 id="t-menu">Menu dal QR</h2>
+    <p class="spiega">Il cliente inquadra il QR al tavolo: piatti, prezzi e i 14 allergeni. Lo cambiate dal telefono.</p>
+    <div class="telefono"><iframe id="f-menu" title="Anteprima del menu" data-src="/menu.html"></iframe></div>
+  </section>
+
+  <section id="sez-tv" class="sezione" aria-labelledby="t-tv" hidden>
+    <h2 id="t-tv">Le offerte sulla TV</h2>
+    <p class="spiega">La TV del negozio mostra offerte, prezzi e foto. Le cambiate dal telefono in un minuto.</p>
+    <div class="cornice-tv"><div id="schermo-tv" class="schermo-tv"><iframe id="f-tv" title="Anteprima della TV" tabindex="-1" data-src="/player.html"></iframe></div></div>
+  </section>
+
+  <section id="sez-cartello" class="sezione" aria-labelledby="t-cartello" hidden>
+    <h2 id="t-cartello">Cartello per il banco</h2>
+    <p class="spiega">Foglio A5 con i QR: recensioni su Google, Instagram, il vostro sito.</p>
+    <article class="foglio" aria-label="Cartello A5">
+      <img class="foglio-logo" data-logo alt="" hidden>
+      <p class="foglio-nome" data-nome></p>
+      <div id="cartello-qr" class="foglio-qr"></div>
+    </article>
+    <p><button type="button" class="bottone" data-stampa>Stampa il cartello</button></p>
+  </section>
+
+  <section id="sez-volantino" class="sezione" aria-labelledby="t-volantino" hidden>
+    <h2 id="t-volantino">Volantino</h2>
+    <p class="spiega">Le stesse offerte della TV, pronte da stampare o da mandare su WhatsApp.</p>
+    <article class="foglio volantino" aria-label="Volantino A5">
+      <header class="volantino-testata">
+        <img class="foglio-logo" data-logo alt="" hidden>
+        <p class="foglio-nome" data-nome></p>
+      </header>
+      <ul id="volantino-offerte" class="volantino-offerte"></ul>
+      <footer class="volantino-piede">
+        <p id="volantino-orari"></p>
+        <p id="volantino-dove"></p>
+      </footer>
+    </article>
+    <p><button type="button" class="bottone" data-stampa>Stampa il volantino</button></p>
+  </section>
+</main>
+</body>
+</html>
